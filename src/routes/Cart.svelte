@@ -2,7 +2,7 @@
     import CartItem from "./CartItem.svelte"
     import { cartContent } from "./store"
 
-    $: totalCart = $cartContent.reduce((acc, val) => { return acc + val.sum }, 0);
+    $: totalCart = $cartContent.reduce((acc, plant) => { return acc + (plant.quantity * plant.price) }, 0);
 
 </script>
 
@@ -30,6 +30,7 @@
         flex-direction: column;
         align-items: center;
         margin : 2rem 5rem;
+        height : 100%;
     }
 
     .subtitle {

@@ -3,6 +3,7 @@
     import { cartContent } from "./store"
 
     export let item;
+    let isDisabled = false;
 
     const increment = () => {
         cartContent.update(cart => {
@@ -20,22 +21,10 @@
         cartContent.update(cart => {return cart.filter( plant => plant.id !== item.id)})
     };
 
-    const sumOfEachPlant = () => {
-        cartContent.update( cart => {
-            return cart.map(plant => plant.id === item.id ? {...plant, sum : (plant.quantity * plant.price)} : plant)
-        })
-    };
+    $: sumOfEachPlant = $cartContent.map(plant=> {if(plant.id === item.id) return (plant.quantity * plant.price).toFixed(2)});
 
 
-    const updateIncrement = () => {
-        increment();
-        sumOfEachPlant();
-    };
 
-    const updateDecrement = () => {
-        decrement();
-        sumOfEachPlant();
-    };
 
 </script>
 
@@ -43,10 +32,10 @@
     <div class="item-wrapper">
         <img class="item-image--small" src={item.image} alt={item.name} />
         <h3 class="item--name">{item.name}</h3>
-        <div class="centered-left"><button class="quantity-button" on:click={updateDecrement}>-</button></div>
+        <div class="centered-left"><button class="quantity-button" on:click={decrement}>-</button></div>
         <p class="item--desc">{item.quantity}</p>
-        <div class="centered-right"><button class="quantity-button" on:click={updateIncrement}>+</button></div>
-        <p class="item--desc">{item.sum.toFixed(2)}€</p>
+        <div class="centered-right"><button class="quantity-button" on:click={increment}>+</button></div>
+        <p class="item--desc">{sumOfEachPlant}€</p>
         <div class="up-right"><button class="delete-button" on:click={deleteItem}>x</button></div>
     </div>
 {/if}

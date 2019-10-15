@@ -6,10 +6,22 @@
     let isVisible = false;
 
     const addToCart = (id, image, name, quantity, price, sum) => {
-        cartContent.update(oldCartContent =>  [...oldCartContent, {id, image, name, quantity, price, sum}]);
-        isVisible = true
+        cartContent.update(oldCartContent =>  {
+            const idx = oldCartContent.filter(x => x['id'] === id);
+            if(!idx.length){
+                return [...oldCartContent, { id, image, name, quantity, price, sum }]
+            } else {
+                return  oldCartContent.map(x => x['id'] === id ? { ...x, quantity : x['quantity'] + 1} : x)
+            }
+        } );
+        isVisible = true;
     };
 
+    /*const addToCart = (id, image, name, quantity, price, sum) => {
+        cartContent.update((oldCartContent => oldCartContent.map(plant => plant.id === id
+                ? [...oldCartContent, {...plant, quantity: plant.quantity + 1}]
+                : [...oldCartContent, {id, image, name, quantity, price, sum}])))
+    };*/
 
     let plants = [
         {
@@ -19,7 +31,6 @@
             "price" : 79.90,
             "image" : "/images/calathea.jpg",
             "quantity" : 1,
-            "sum" : 79.90,
         },
         {
             "id" : 2,
@@ -28,7 +39,6 @@
             "price" : 22.90,
             "image" : "/images/mini-cactus.jpg",
             "quantity" : 1,
-            "sum" : 22.90,
         },
         {
             "id" : 3,
@@ -37,7 +47,6 @@
             "price" : 65.90,
             "image" : "/images/calamondin.jpg",
             "quantity" : 1,
-            "sum" : 65.90,
         },
         {
             "id" : 4,
@@ -46,7 +55,6 @@
             "price" : 39.90,
             "image" : "/images/ficus.jpg",
             "quantity" : 1,
-            "sum" : 39.90,
         },
         {
             "id" : 5,
@@ -55,7 +63,6 @@
             "price" : 59.90,
             "image" : "/images/kentia.jpg",
             "quantity" : 1,
-            "sum" : 59.90,
         },
         {
             "id" : 6,
@@ -64,7 +71,6 @@
             "price" : 65.90,
             "image" : "/images/peperomia.jpg",
             "quantity" : 1,
-            "sum" : 65.90,
         },
         {
             "id" : 7,
@@ -73,7 +79,6 @@
             "price" : 65.90,
             "image" : "/images/monstera.jpg",
             "quantity" : 1,
-            "sum" : 65.90,
         }
     ];
 
@@ -89,7 +94,7 @@
 
     <div class="card--wrapper">
         {#each plants as plant}
-            <PlantCard plant={plant} buy={addToCart}/>
+            <PlantCard plant={plant} buy={addToCart} />
         {/each}
     </div>
 </section>

@@ -29,11 +29,6 @@
 	</Router>
 
 
-<footer class="footer">
-	<h4 class="footer--title">Bergamotte</h4>
-	<p class="footer--text">À peine cueillies, déjà livrées</p>
-</footer>
-
 <style>
 
 	@import url('https://fonts.googleapis.com/css?family=Lora&display=swap');
