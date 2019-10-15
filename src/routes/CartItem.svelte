@@ -13,7 +13,9 @@
 
     const decrement = () => {
         cartContent.update( cart => {
-            return cart.map(plant => plant.id === item.id ? {...plant, quantity : plant.quantity -1} : plant)
+            return cart
+                    .map(plant => plant.id === item.id ? {...plant, quantity : Math.max(0, plant.quantity -1)} : plant)
+                    //.filter(v => v.quantity)
         })
     };
 
@@ -21,9 +23,7 @@
         cartContent.update(cart => {return cart.filter( plant => plant.id !== item.id)})
     };
 
-    $: sumOfEachPlant = $cartContent.map(plant=> {if(plant.id === item.id) return (plant.quantity * plant.price).toFixed(2)});
-
-
+    $: totalPrice = item.price * item.quantity
 
 
 </script>
@@ -35,7 +35,7 @@
         <div class="centered-left"><button class="quantity-button" on:click={decrement}>-</button></div>
         <p class="item--desc">{item.quantity}</p>
         <div class="centered-right"><button class="quantity-button" on:click={increment}>+</button></div>
-        <p class="item--desc">{sumOfEachPlant}€</p>
+        <p class="item--desc">{totalPrice.toFixed(2)}€</p>
         <div class="up-right"><button class="delete-button" on:click={deleteItem}>x</button></div>
     </div>
 {/if}

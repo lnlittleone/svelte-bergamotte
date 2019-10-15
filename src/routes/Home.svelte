@@ -1,7 +1,10 @@
 <main class="home">
     <section class="section">
-        <h2 class="section--title">Nuances d'Automne</h2>
-        <p class="section--title">Les plus belles fleurs et plantes livrées chez vous en un instant</p>
+        <img alt="Aberdeen +" class="home--img" srcset="https://bergamotte.imgix.net/assets/images/264727/original/IMG_7348.jpg?ixlib=rails-2.1.4&amp;auto=format%2Ccompress&amp;fit=crop&amp;h=540&amp;q=95&amp;w=540 540w, https://bergamotte.imgix.net/assets/images/264727/original/IMG_7348.jpg?ixlib=rails-2.1.4&amp;auto=format%2Ccompress&amp;fit=crop&amp;h=1080&amp;q=95&amp;w=1080 1080w, https://bergamotte.imgix.net/assets/images/264727/original/IMG_7348.jpg?ixlib=rails-2.1.4&amp;auto=format%2Ccompress&amp;fit=crop&amp;h=1620&amp;q=95&amp;w=1620 1620w" src="https://bergamotte.imgix.net/assets/images/264727/original/IMG_7348.jpg?ixlib=rails-2.1.4&amp;auto=format%2Ccompress&amp;fit=crop&amp;h=540&amp;q=95&amp;w=540">
+        <div class="section--intro">
+            <h2 class="section--title">Nuances d'Automne</h2>
+            <p class="section--title">Les plus belles fleurs et plantes livrées chez vous en un instant</p>
+        </div>
     </section>
 
     <section class="section--prefooter">
@@ -34,23 +37,39 @@
         width : 100%;
         height : 100%;
     }
-
     .section {
         display : flex;
-        justify-content: center;
-        flex-direction: column;
+        justify-content: space-evenly;
+        flex-wrap : wrap;
         align-items: center;
+        padding : 1rem;
     }
+
+    .home--img {
+        width : 540px;
+    }
+
+    .section--intro {
+        width : 540px;
+        display : flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding : 1rem;
+    }
+
     .section--title {
         font-family: "Lora", sans-serif;
-        color : #ebebeb;
+        color : #94AF94;
     }
 
     .section--prefooter {
         display : flex;
         background : #94AF94;
         justify-content: space-evenly;
-        padding: 40px 0;
+        padding: 2.5rem 0;
+        flex-wrap : wrap;
+        margin : 1rem;
     }
 
     .section--subtitle{
@@ -68,6 +87,18 @@
         color: white;
         text-align: center;
         line-height: 1.6rem;
+    }
+
+    @media (max-width : 480px){
+
+        .section--intro {
+           transform : translateY(-150%);
+        }
+
+        .section--title{
+            text-shadow: 2px 2px 2px #313131;
+            color: #ebebeb;
+        }
     }
 
 

@@ -1,8 +1,12 @@
 <script>
     import CartItem from "./CartItem.svelte"
-    import { cartContent } from "./store"
+    import { cartContent, plants } from "./store"
 
-    $: totalCart = $cartContent.reduce((acc, plant) => { return acc + (plant.quantity * plant.price) }, 0);
+      $: totalCart = $cartContent.reduce((acc, cartItem) => {
+        const unitPrice = $plants.find(p => p.id === cartItem.id).price;
+        const price = unitPrice * cartItem.quantity;
+        return acc + price
+    }, 0);
 
 </script>
 
@@ -20,7 +24,7 @@
 
     <div class="cart--footer">
         <h2 class="cart--total">Total :</h2>
-        <h2 class="cart--total">{totalCart.toFixed(2)}</h2>
+        <h2 class="cart--total">{totalCart.toFixed(2)}€</h2>
     </div>
 </section>
 

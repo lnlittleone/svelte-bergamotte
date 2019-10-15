@@ -4,7 +4,14 @@
 	import Cards from "./routes/Cards.svelte";
 	import Cart from "./routes/Cart.svelte"
 	import Panier from "./svg/Panier.svelte"
+	import { cartContent, plants } from "./routes/store"
+
 	export let url = "";
+
+	$: cartQuantities = $cartContent.reduce((acc, cartItem) => {
+		const quantity = cartItem.quantity;
+		return acc + quantity
+	}, 0);
 
 </script>
 
@@ -17,7 +24,7 @@
 			<nav class="site--navbar">
 				<Link class="link" to="/">Home</Link>
 				<Link to="Cards">Plantes</Link>
-				<Link to="Cart"><Panier/></Link>
+				<Link to="Cart"><Panier/>{cartQuantities}</Link>
 			</nav>
 
 			<div>
@@ -55,7 +62,6 @@
 	}
 
 	.site--navbar {
-		max-height : 75px;
 		width : 100%;
 		border-bottom : 1px solid #ebebeb;
 		display : flex;
@@ -63,15 +69,18 @@
 		color: #94AF94;
 	}
 
-	.site--navbar > a {
-		background-color: transparent;
-		color: #94AF94;
-		font-weight: normal;
-		text-decoration: none;
-		border-bottom: 1px solid #94AF94;
-		height: 48px;
-		padding : 20px;
+	 :global(.site--navbar a) {
+		 color: #94AF94;
+		 font-weight: normal;
+		 text-decoration: none;
+		 border-bottom: 1px solid transparent;
+		 padding : 20px;
+		 text-transform: uppercase;
 	}
+
+	 :global(.site--navbar a:hover) {
+		 border-bottom: 1px solid #94AF94;
+	 }
 
 	.footer {
 		position: fixed;
@@ -96,6 +105,7 @@
 		font-family: "Lora", serif;
 		color: #313131;
 	}
+
 </style>
 
 
