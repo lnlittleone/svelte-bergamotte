@@ -1,11 +1,9 @@
 import {writable} from 'svelte/store';
 
-
-
 export let cartContent = writable(loadCart());
 
 cartContent.subscribe((v) => {
-    localStorage.cart = JSON.stringify(v)
+    localStorage.setItem("cart", JSON.stringify(v));
 });
 
 export let plants = writable([
@@ -71,7 +69,7 @@ export let plants = writable([
 
 function loadCart() {
     try {
-        return JSON.parse(localStorage.cart)
+        return JSON.parse(localStorage.getItem("cart"))
     } catch (e) {
         return []
     }

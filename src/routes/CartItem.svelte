@@ -29,12 +29,14 @@
 </script>
 
 {#if item}
-    <div class="item-wrapper">
+    <div class="item--wrapper">
         <img class="item-image--small" src={item.image} alt={item.name} />
         <h3 class="item--name">{item.name}</h3>
-        <div class="centered-left"><button class="quantity-button" on:click={decrement}>-</button></div>
-        <p class="item--desc">{item.quantity}</p>
-        <div class="centered-right"><button class="quantity-button" on:click={increment}>+</button></div>
+        <div class="button--wrapper">
+            <div class="centered-left"><button class="quantity-button" on:click={decrement}>-</button></div>
+            <p class="item--desc">{item.quantity}</p>
+            <div class="centered-right"><button class="quantity-button" on:click={increment}>+</button></div>
+        </div>
         <p class="item--desc">{totalPrice.toFixed(2)}€</p>
         <div class="up-right"><button class="delete-button" on:click={deleteItem}>x</button></div>
     </div>
@@ -43,10 +45,10 @@
 
 
 <style>
-    .item-wrapper {
+    .item--wrapper {
         border : solid 1px #ebebeb;
         display :grid;
-        grid-template-columns: 0.5fr 3fr 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
+        grid-template-columns: 0.5fr 3fr 2fr 0.5fr 0.5fr;
         padding : 0.625rem;
         width : 100%;
         box-sizing: border-box;
@@ -108,11 +110,40 @@
 
     .delete-button{
         border : none;
-        width : 2.5rem;
-        height : 2.5rem;
+        width : 3rem;
+        height : 3rem;
         background : transparent;
         margin : 0;
         padding : 0;
         cursor : pointer;
     }
+
+    .button--wrapper{
+        display : flex;
+        justify-content: space-evenly;
+        width : 100%;
+    }
+
+    @media (max-width : 480px){
+
+        .item--wrapper{
+            display : flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .button--wrapper{
+            display : flex;
+            justify-content: space-evenly;
+            margin : 10px;
+        }
+
+        .item-image--small{
+            width : 200px;
+        }
+
+    }
+
+
+
 </style>

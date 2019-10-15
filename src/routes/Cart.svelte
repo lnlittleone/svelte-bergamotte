@@ -104,4 +104,16 @@
         font-size: 1.25rem;
         color : #313131;
     }
+
+    @media (max-width : 480px){
+        .cart {
+            margin : 1rem;
+        }
+    }
+
+    @media (max-width : 650px){
+        .cart {
+            margin : 1.5rem;
+        }
+    }
 </style>
